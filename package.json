@@ -1,6 +1,6 @@
 {
   "name": "@nks-hub/osticket-mcp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MCP server for osTicket — list, search, get, create, update, reply, delete tickets plus stats, statuses, subtickets and attachments, over a single JSON API.",
   "type": "module",
   "bin": {

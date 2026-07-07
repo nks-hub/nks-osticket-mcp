@@ -14,7 +14,7 @@ import { loadConfig } from "./config.js";
 import { OsticketClient, OsticketApiError } from "./client.js";
 
 const SERVER_NAME = "nks-osticket-mcp";
-const SERVER_VERSION = "1.0.0";
+const SERVER_VERSION = "1.1.0";
 
 /** One MCP tool bound to a single API action. */
 interface ToolDef {
@@ -57,7 +57,8 @@ const TOOLS: ToolDef[] = [
   },
   {
     name: "osticket_get_ticket",
-    description: "Get one ticket with full detail including the message thread. Provide number or id.",
+    description:
+      "Get one ticket with full detail including the message thread. Each thread entry may include an \"attachments\" array (fileId, name, type, size, inline, cid); pass an attachment's numeric fileId to osticket_download_attachment. Provide number or id.",
     action: "tickets.get",
     shape: { ...ticketRef },
   },
@@ -147,7 +148,8 @@ const TOOLS: ToolDef[] = [
   },
   {
     name: "osticket_download_attachment",
-    description: "Download a ticket attachment by file id, returned as base64.",
+    description:
+      "Download a ticket attachment by its numeric file id (from a thread entry's attachments[].fileId in osticket_get_ticket), returned as base64.",
     action: "attachments.download",
     shape: { fileId: z.number().int().positive().describe("Attachment file id") },
   },

@@ -5,6 +5,14 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-07-07
+
+### Changed
+- `osticket_get_ticket` now documents the `attachments` array returned on each
+  thread entry (`fileId`, `name`, `type`, `size`, `inline`, `cid`) and points
+  to `osticket_download_attachment`, which now notes the `fileId` comes from
+  there. Backed by plugin 1.1.0; no schema change on the MCP side.
+
 ## [1.0.0] - 2026-07-05
 
 ### Added
