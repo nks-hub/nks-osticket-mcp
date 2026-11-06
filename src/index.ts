@@ -16,7 +16,7 @@ import { loadConfig } from "./config.js";
 import { OsticketClient, OsticketApiError } from "./client.js";
 
 const SERVER_NAME = "nks-osticket-mcp";
-const SERVER_VERSION = "1.2.0";
+const SERVER_VERSION = "1.3.0";
 
 /** One MCP tool bound to a single API action. */
 interface ToolDef {
@@ -162,6 +162,20 @@ const TOOLS: ToolDef[] = [
         .describe("Files attached to the reply and to its email. Each file is limited by osTicket's max_file_size."),
     },
     prepare: loadAttachments,
+  },
+  {
+    name: "osticket_assign_ticket",
+    description:
+      "Assign a ticket to an agent, like the staff panel: logs the assignment, optionally posts an internal note and alerts the assignee. Fails (409) if the ticket already has an assignee, unless reassign is true.",
+    action: "tickets.assign",
+    shape: {
+      number: z.string().describe("Ticket number to assign"),
+      assigneeId: z.number().int().positive().describe("Staff id of the new assignee"),
+      note: z.string().optional().describe("Internal note logged with the assignment"),
+      alert: z.boolean().optional().describe("Send the assignment alert to the assignee (default true)"),
+      staffId: z.number().int().positive().optional().describe("Agent recorded as the one who assigned (default: the configured API agent)"),
+      reassign: z.boolean().optional().describe("Allow replacing an existing assignee (default false)"),
+    },
   },
   {
     name: "osticket_delete_ticket",

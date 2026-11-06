@@ -1,6 +1,6 @@
 # NKS osTicket MCP
 
-[![Version](https://img.shields.io/badge/version-1.2.0-orange.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.3.0-orange.svg)](CHANGELOG.md)
 [![Node.js](https://img.shields.io/badge/Node.js-18+-339933.svg?logo=node.js&logoColor=white)](#requirements)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6.svg?logo=typescript&logoColor=white)](tsconfig.json)
 [![MCP](https://img.shields.io/badge/MCP-stdio-111827.svg)](https://modelcontextprotocol.io/)
@@ -20,7 +20,7 @@ It talks to the companion [NKS osTicket API plugin](https://github.com/nks-hub/n
 - 🌳 **Subtickets** - Link, unlink and browse parent/child tickets
 - 📎 **Attachments** - Attach local files to a reply; thread entries list their attachments and any of them downloads as base64
 - ⏱️ **Error reporting** - Requests time out after 30 s by default (504), network failures return 502, and API errors come back to the agent with osTicket's code and message; self-signed TLS can be allowed
-- 🧩 **14 tools** - One MCP server over stdio, configured by environment variables
+- 🧩 **15 tools** - One MCP server over stdio, configured by environment variables
 
 ## Requirements
 
@@ -81,6 +81,7 @@ Add to your MCP server configuration:
 | `osticket_create_ticket` | Create a ticket |
 | `osticket_update_ticket` | Change status / due date / topic, add internal note (optionally as agent `staffId`) |
 | `osticket_reply_ticket` | Post a customer-facing reply (emailed; optional `staffId`, `replyTo`: `all`, `user`, `collabs`, and `attachments`) |
+| `osticket_assign_ticket` | Assign a ticket to an agent (`assigneeId`; optional `note`, `alert`, `staffId`, `reassign`); needs plugin 1.4.0 |
 | `osticket_delete_ticket` | Delete a ticket (irreversible) |
 | `osticket_link_subticket` | Link child under parent |
 | `osticket_unlink_subticket` | Remove a child's parent link |
