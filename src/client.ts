@@ -6,7 +6,6 @@
  * client unwraps that envelope and turns failures into typed errors.
  */
 
-import { Agent } from "node:https";
 import type { Config } from "./config.js";
 
 export class OsticketApiError extends Error {
@@ -27,12 +26,11 @@ interface Envelope {
 }
 
 export class OsticketClient {
-  private readonly agent?: Agent;
-
   constructor(private readonly config: Config) {
-    // Only needed to permit self-signed TLS in local/dev setups.
+    // Opt-in for self-signed TLS in local/dev setups. Node's fetch ignores an
+    // https.Agent, so only the process-wide switch reaches its TLS layer.
     if (!config.rejectUnauthorized && config.url.startsWith("https:")) {
-      this.agent = new Agent({ rejectUnauthorized: false });
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
     }
   }
 
@@ -55,8 +53,6 @@ export class OsticketClient {
         },
         body: JSON.stringify({ action, params }),
         signal: controller.signal,
-        // @ts-expect-error Node's fetch accepts a dispatcher/agent at runtime.
-        agent: this.agent,
       });
     } catch (err) {
       const reason = err instanceof Error ? err.message : String(err);
