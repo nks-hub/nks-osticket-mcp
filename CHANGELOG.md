@@ -5,6 +5,13 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.2] - 2026-11-24
+
+### Fixed
+- `NKS_OSTICKET_REJECT_UNAUTHORIZED=false` now accepts a self-signed
+  certificate. Node's `fetch` ignored the `https.Agent` the client passed it,
+  so the setting had no effect. Certificate validation stays on by default.
+
 ## [1.3.1] - 2026-11-24
 
 ### Security

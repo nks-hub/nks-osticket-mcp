@@ -16,7 +16,7 @@ import { loadConfig } from "./config.js";
 import { OsticketClient, OsticketApiError } from "./client.js";
 
 const SERVER_NAME = "nks-osticket-mcp";
-const SERVER_VERSION = "1.3.1";
+const SERVER_VERSION = "1.3.2";
 
 /** One MCP tool bound to a single API action. */
 interface ToolDef {
